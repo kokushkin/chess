@@ -325,12 +325,3 @@ Chess.UI.prototype.revertBoard = function() {
 	rowsArray.reverse();
 	$(bordTable).append(rowsArray);
 }
-
-/**
- * Creates a new chessboard and sets up the game at the standard chess initial position.
- */
-function makeChessGame() {
-	Chess.UI.makeBoard();
-	var ui = new Chess.UI;
-	ui.updateChessPosition();
-}
