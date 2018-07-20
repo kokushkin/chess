@@ -57,7 +57,9 @@ Chess.UI.CHESSBOARD_PIECES_AND_SQUARES = Chess.UI.CHESSBOARD_SQUARE + ", " + Che
  */
 Chess.UI.makeBoard = function() {
 	var table = $("<table>");
-	var filesRow = '<tr><th></th>' + "abcdefgh".split("").map(/** @param {string} x @return {string} */ function(x) { return '<th class="file">' + x + "</th>"; }).join("") + "<th></th></tr>";
+	var filesRow = '<tr><th></th>' + "abcdefgh".split("")
+		.map(/** @param {string} x @return {string} */ function(x) { return '<th class="file">' + x + "</th>"; })
+		.join("") + "<th></th></tr>";
 	table.append(filesRow);
 
 	for (var row = 0; row < Chess.RANKS; ++row) {
@@ -302,6 +304,24 @@ Chess.UI.prototype.updateChessPosition = function() {
 		}
 	}
 };
+
+/**
+ * Revert desk with figers on 180 degree.
+ */
+Chess.UI.prototype.revertBoard = function() {
+	var bordTable = $(Chess.UI.CHESSBOARD_TABLE + " tbody");
+
+	//for each row
+	bordTable.children().each(function(i, row) {
+		//revert row		
+		var cellArray = $.makeArray($("th, td", row).detach());
+		cellArray.reverse();
+		$(row).append(cellArray);		
+	});
+
+	//rewert all rows
+	bordTable.children = bordTable.children.reverse();
+}
 
 /**
  * Creates a new chessboard and sets up the game at the standard chess initial position.
