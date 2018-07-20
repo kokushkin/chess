@@ -309,6 +309,7 @@ Chess.UI.prototype.updateChessPosition = function() {
  * Revert desk with figers on 180 degree.
  */
 Chess.UI.prototype.revertBoard = function() {
+
 	var bordTable = $(Chess.UI.CHESSBOARD_TABLE + " tbody");
 
 	//for each row
@@ -320,7 +321,9 @@ Chess.UI.prototype.revertBoard = function() {
 	});
 
 	//rewert all rows
-	bordTable.children = bordTable.children.reverse();
+	var rowsArray = $.makeArray($("tr", bordTable).detach());
+	rowsArray.reverse();
+	$(bordTable).append(rowsArray);
 }
 
 /**
