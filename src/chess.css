@@ -80,7 +80,15 @@ h1 {
 	width: 100%;
 }
 
-#clear {
+#top_panel button, #buttom_panel button {
+	float: left;
+}
+
+#buttom_panel {
+	float: left;
+}
+
+.clear {
 	clear: both;
 	width: 0;
 	height: 0;
