@@ -54,26 +54,41 @@ h1 {
 	height: 700px;
 	float: left;
 	padding: 0;
+	margin: 5px;
 }
 
-#moves, #right_panel {
+.panel {
 	border: 1px solid silver;
 	border-radius: 14px;
-	width: 138px;
-	/* max-width: 168px; */
 	padding: 5px;
-	padding-left: 15px;
-	float: right;
-	overflow: auto;
-	
+	margin: 5px;
+	float: left;
+	/* overflow: auto; */
 }
+
+.corner {
+	height: 50px;
+	width: 50px;
+}
+
+.vertical_panel {
+	height: 688px;
+	width: 50px;
+}
+
+.horizontal_panel{
+	height: 50px;
+	width: 688px;
+}
+
+
 
 #moves {
 	height: 476px;
 }
 
 #right_panel {
-	height: 200px;
+	height: 190px;
 }
 
 #moves button, #right_panel button {
@@ -85,6 +100,9 @@ h1 {
 }
 
 #buttom_panel {
+	float: left;
+}
+#temp {
 	float: left;
 }
 

@@ -11,21 +11,32 @@
 	<body>
 		<h1>Chess</h1>
 		<div id="content">
-			<div id="top_panel">
+			<div class="panel corner"></div>
+			<div id="top_panel" class="panel horizontal_panel">
 				<button>Human</button>
 				<button>Ask Computer</button>
 				<button>Computer</button>
+				<div class="clear"></div>
 			</div>
+			<div class="panel corner"></div>
+			
+			<div id="left_panel" class="panel vertical_panel"></div>
 			<div id="chessboard" role="main"></div>
-			<div id="moves"></div>
-			<div id="right_panel">
+			<div id="moves" class="panel vertical_panel"></div>
+			<div id="right_panel" class="panel vertical_panel">
 				<button onclick="ui.revertBoard()">Rotate Desk</button>
 			</div>
-			<div id="buttom_panel">
+
+			<div class="clear"></div>
+			<div class="panel corner"></div>
+			<div id="buttom_panel" class="panel horizontal_panel">
 					<button>Human</button>
 					<button>Ask Computer</button>
 					<button>Computer</button>
+					<div class="clear"></div>
 			</div>
+			<div class="panel corner"></div>
+
 			<div class="clear"></div>
 			<div id="help">
 				<ul>
