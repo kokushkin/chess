@@ -28,6 +28,18 @@ h1 {
 	border-top-right-radius: 14px;
 }
 
+button {
+	border-radius: 5px;
+	margin: 3px;
+	height: 38px;
+}
+
+#revert_button{
+	margin-bottom: -19px;	
+	position: relative;
+	top: 50%; 
+}
+
 #content {
 	background: white;
 	padding: 14px 40px;
@@ -69,19 +81,18 @@ h1 {
 .corner {
 	height: 50px;
 	width: 50px;
+	visibility:hidden;
 }
 
 .vertical_panel {
 	height: 688px;
-	width: 50px;
+	width: 60px;
 }
 
 .horizontal_panel{
 	height: 50px;
 	width: 688px;
 }
-
-
 
 #moves {
 	height: 476px;
@@ -96,13 +107,6 @@ h1 {
 }
 
 #top_panel button, #buttom_panel button {
-	float: left;
-}
-
-#buttom_panel {
-	float: left;
-}
-#temp {
 	float: left;
 }
 
