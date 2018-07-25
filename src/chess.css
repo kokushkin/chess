@@ -35,8 +35,18 @@ button {
 }
 
 #revert_button{
-	position: relative;
+	position:absolute;
 	top: 325px; 
+}
+
+#top_direction_button {
+	position:absolute;
+	top: 0px;
+}
+
+#bottom_direction_button {
+	position:absolute;
+	top: 650px;
 }
 
 #content {
@@ -107,6 +117,10 @@ button {
 
 #top_panel button, #buttom_panel button {
 	float: left;
+}
+
+#left_panel {
+	position: relative;
 }
 
 .clear {
