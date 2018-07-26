@@ -20,6 +20,9 @@ Chess.UI = function() {
 
 	/** @type {!Chess.AI} */
 	this.ai = new Chess.AI;
+
+	this.topFiguresDirection = Chess.UI.UP_DIRECTION;
+	this.bottomFiguresDirection = Chess.UI.DOWN_DIRECTION;
 };
 
 /**
@@ -51,6 +54,18 @@ Chess.UI.CHESSBOARD_PIECE = Chess.UI.CHESSBOARD_SQUARE + " div";
  * @type {string}
  */
 Chess.UI.CHESSBOARD_PIECES_AND_SQUARES = Chess.UI.CHESSBOARD_SQUARE + ", " + Chess.UI.CHESSBOARD_PIECE;
+
+/**
+ * @const
+ * @type {string}
+ */
+Chess.UI.UP_DIRECTION = "up";
+
+/**
+ * @const
+ * @type {string}
+ */
+Chess.UI.DOWN_DIRECTION = "down";
 
 /** 
  * Creates a new chessboard table under an element with id="chessboard"
@@ -324,4 +339,23 @@ Chess.UI.prototype.revertBoard = function() {
 	var rowsArray = $.makeArray($("tr", bordTable).detach());
 	rowsArray.reverse();
 	$(bordTable).append(rowsArray);
+}
+
+
+
+/*
+* Change direction of figers (top or down), rotate them on 180 degree.
+*/
+Chess.UI.prototype.changeFiguresDirection = function(idButton) {
+	if(idButton == "top_direction_button")
+	{
+		$(Chess.UI.CHESSBOARD_TABLE + " tbody");
+		this.topFiguresDirection = this.topFiguresDirection == Chess.UI.UP_DIRECTION ? 
+		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+	}
+	else if(idButton == "bottom_direction_button")
+	{
+		this.bottomFiguresDirection = this.bottomFiguresDirection == "up" ? 
+		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+	}
 }
