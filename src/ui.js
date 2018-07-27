@@ -349,13 +349,23 @@ Chess.UI.prototype.revertBoard = function() {
 Chess.UI.prototype.changeFiguresDirection = function(idButton) {
 	if(idButton == "top_direction_button")
 	{
-		$(Chess.UI.CHESSBOARD_TABLE + " tbody");
-		this.topFiguresDirection = this.topFiguresDirection == Chess.UI.UP_DIRECTION ? 
-		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+		if(this.topFiguresDirection == Chess.UI.DOWN_DIRECTION)
+		{
+			var rotateDeg = 0;
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", "rotate(${rotateDeg}deg)");
+			this.topFiguresDirection =  Chess.UI.UP_DIRECTION;
+		}
+		else if(this.topFiguresDirection == Chess.UI.UP_DIRECTION)
+		{
+			var rotateDeg = 180;
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", "rotate(${rotateDeg}deg)");
+			this.topFiguresDirection =  Chess.UI.DOWN_DIRECTION;
+		}		
 	}
 	else if(idButton == "bottom_direction_button")
 	{
-		this.bottomFiguresDirection = this.bottomFiguresDirection == "up" ? 
+		$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", "rotate(180deg)");
+		this.bottomFiguresDirection = this.bottomFiguresDirection == Chess.UI.UP_DIRECTION ? 
 		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
 	}
 }
