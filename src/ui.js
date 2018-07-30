@@ -21,9 +21,21 @@ Chess.UI = function() {
 	/** @type {!Chess.AI} */
 	this.ai = new Chess.AI;
 
-	this.topFiguresDirection = Chess.UI.UP_DIRECTION;
-	this.bottomFiguresDirection = Chess.UI.UP_DIRECTION;
-	this.revertedBoard = false;
+
+	this.initialFirstPlayerView = {
+		playerColor : Chess.UI.WHITE_COLOR,
+		playerDirection : Chess.UI.UP_DIRECTION,
+		playerPosition : Chess.UI.BUTTOM_POSITION
+	};
+
+	this.initialSecondPlayerView = {
+		playerColor : Chess.UI.BLACK_COLOR,
+		playerDirection : Chess.UI.UP_DIRECTION,
+		playerPosition : Chess.UI.TOP_POSITION
+	}
+
+	this.currentFirstPlayerView = $.extend({}, this.initialFirstPlayerView);
+	this.currentSecondPlayerView =$.extend({}, this.initialSecondPlayerView);
 };
 
 /**
@@ -61,12 +73,21 @@ Chess.UI.CHESSBOARD_PIECES_AND_SQUARES = Chess.UI.CHESSBOARD_SQUARE + ", " + Che
  * @type {string}
  */
 Chess.UI.UP_DIRECTION = "up";
+Chess.UI.DOWN_DIRECTION = "down";
 
 /**
  * @const
  * @type {string}
  */
-Chess.UI.DOWN_DIRECTION = "down";
+Chess.UI.TOP_POSITION = "top";
+Chess.UI.BUTTOM_POSITION = "bottom";
+
+/**
+ * @const
+ * @type {string}
+ */
+Chess.UI.WHITE_COLOR = "white";
+Chess.UI.BLACK_COLOR = "black";
 
 /** 
  * Creates a new chessboard table under an element with id="chessboard"
@@ -161,6 +182,8 @@ Chess.UI.prototype.updatePieces = function() {
 		$("#" + Chess.getAlgebraicFromIndex(lastMove.getTo())).addClass("last-move");
 		// TODO: en passant, castling
 	}
+
+	this.changeFiguresDirection();
 };
 
 /**
@@ -321,6 +344,29 @@ Chess.UI.prototype.updateChessPosition = function() {
 	}
 };
 
+
+Chess.UI.prototype.setRevertBoard = function() {
+	this.currentFirstPlayerView.playerPosition = 
+		this.currentFirstPlayerView.playerPosition == Chess.UI.TOP_POSITION ? 
+		Chess.UI.BUTTOM_POSITION : Chess.UI.TOP_POSITION;
+
+	this.currentFirstPlayerView.playerDirection = 
+		this.currentFirstPlayerView.playerDirection == Chess.UI.UP_DIRECTION ?
+		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+
+	this.currentSecondPlayerView.playerPosition = 
+		this.currentSecondPlayerView.playerPosition == Chess.UI.TOP_POSITION ? 
+		Chess.UI.BUTTOM_POSITION : Chess.UI.TOP_POSITION;
+
+	this.currentSecondPlayerView.playerDirection = 
+		this.currentSecondPlayerView.playerDirection == Chess.UI.UP_DIRECTION ?
+		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+
+	this.revertBoard();
+
+	this.updatePieces();
+}
+
 /**
  * Revert desk with figers on 180 degree.
  */
@@ -350,45 +396,60 @@ Chess.UI.prototype.revertBoard = function() {
 }
 
 
+Chess.UI.prototype.setChangeFiguresDirection = function(idButton) {
+	if(idButton == "top_direction_button")
+	{
+		if(this.currentFirstPlayerView.playerPosition == Chess.UI.TOP_POSITION)
+		{
+			if(this.currentFirstPlayerView.playerDirection == Chess.UI.UP_DIRECTION)
+				this.currentFirstPlayerView.playerDirection = Chess.UI.DOWN_DIRECTION;
+			else if(this.currentFirstPlayerView.playerDirection == Chess.UI.DOWN_DIRECTION)
+				this.currentFirstPlayerView.playerDirection = Chess.UI.UP_DIRECTION;
+		}
+		else if(this.currentSecondPlayerView.playerPosition == Chess.UI.TOP_POSITION)
+		{
+			if(this.currentSecondPlayerView.playerDirection == Chess.UI.UP_DIRECTION)
+				this.currentSecondPlayerView.playerDirection = Chess.UI.DOWN_DIRECTION;
+			else if(this.currentSecondPlayerView.playerDirection == Chess.UI.DOWN_DIRECTION)
+				this.currentSecondPlayerView.playerDirection = Chess.UI.UP_DIRECTION;
+		}
+	}
+	else if(idButton == "bottom_direction_button")
+	{
+		if(this.currentFirstPlayerView.playerPosition == Chess.UI.BUTTOM_POSITION)
+		{
+			if(this.currentFirstPlayerView.playerDirection == Chess.UI.UP_DIRECTION)
+				this.currentFirstPlayerView.playerDirection = Chess.UI.DOWN_DIRECTION;
+			else if(this.currentFirstPlayerView.playerDirection == Chess.UI.DOWN_DIRECTION)
+				this.currentFirstPlayerView.playerDirection = Chess.UI.UP_DIRECTION;
+		}
+		else if(this.currentSecondPlayerView.playerPosition == Chess.UI.BUTTOM_POSITION)
+		{
+			if(this.currentSecondPlayerView.playerDirection == Chess.UI.UP_DIRECTION)
+				this.currentSecondPlayerView.playerDirection = Chess.UI.DOWN_DIRECTION;
+			else if(this.currentSecondPlayerView.playerDirection == Chess.UI.DOWN_DIRECTION)
+				this.currentSecondPlayerView.playerDirection = Chess.UI.UP_DIRECTION;
+		}
+	}
+
+	this.updatePieces();
+}
+
 
 /*
 * Change direction of figers (top or down), rotate them on 180 degree.
 */
-Chess.UI.prototype.changeFiguresDirection = function(idButton) {
+Chess.UI.prototype.changeFiguresDirection = function() {
 
-	if(this.revertedBoard && idButton == "top_direction_button")
-		idButton == "bottom_direction_button";
-	else if(this.revertedBoard && idButton == "bottom_direction_button")
-		idButton = "top_direction_button";
-
-	if(idButton == "top_direction_button")
+	if(this.currentFirstPlayerView.playerDirection != this.initialFirstPlayerView.playerDirection)
 	{
-		if(this.topFiguresDirection == Chess.UI.DOWN_DIRECTION)
-		{
-			var rotateDeg = 0;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", `rotate(${rotateDeg}deg)`);
-			this.topFiguresDirection =  Chess.UI.UP_DIRECTION;
-		}
-		else if(this.topFiguresDirection == Chess.UI.UP_DIRECTION)
-		{
-			var rotateDeg = 180;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", `rotate(${rotateDeg}deg)`);
-			this.topFiguresDirection =  Chess.UI.DOWN_DIRECTION;
-		}		
+		$(Chess.UI.CHESSBOARD_TABLE + " tbody")
+		.find(`div.${this.currentFirstPlayerView.playerColor}`).css("transform", `rotate(180deg)`);
 	}
-	else if(idButton == "bottom_direction_button")
+
+	if(this.currentSecondPlayerView.playerDirection != this.initialSecondPlayerView.playerDirection)
 	{
-		if(this.bottomFiguresDirection == Chess.UI.DOWN_DIRECTION)
-		{
-			var rotateDeg = 0;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", `rotate(${rotateDeg}deg)`);
-			this.bottomFiguresDirection =  Chess.UI.UP_DIRECTION;
-		}
-		else if(this.bottomFiguresDirection == Chess.UI.UP_DIRECTION)
-		{
-			var rotateDeg = 180;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", `rotate(${rotateDeg}deg)`);
-			this.bottomFiguresDirection =  Chess.UI.DOWN_DIRECTION;
-		}	
+		$(Chess.UI.CHESSBOARD_TABLE + " tbody")
+		.find(`div.${this.currentSecondPlayerView.playerColor}`).css("transform", `rotate(180deg)`);
 	}
 }
