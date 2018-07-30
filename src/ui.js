@@ -22,7 +22,8 @@ Chess.UI = function() {
 	this.ai = new Chess.AI;
 
 	this.topFiguresDirection = Chess.UI.UP_DIRECTION;
-	this.bottomFiguresDirection = Chess.UI.DOWN_DIRECTION;
+	this.bottomFiguresDirection = Chess.UI.UP_DIRECTION;
+	this.revertedBoard = false;
 };
 
 /**
@@ -339,6 +340,13 @@ Chess.UI.prototype.revertBoard = function() {
 	var rowsArray = $.makeArray($("tr", bordTable).detach());
 	rowsArray.reverse();
 	$(bordTable).append(rowsArray);
+
+	//set board is reverted
+	this.revertedBoard = this.revertedBoard ? false : true;
+
+	//changing figures directions
+	this.changeFiguresDirection("top_direction_button");
+	this.changeFiguresDirection("bottom_direction_button");
 }
 
 
@@ -347,25 +355,40 @@ Chess.UI.prototype.revertBoard = function() {
 * Change direction of figers (top or down), rotate them on 180 degree.
 */
 Chess.UI.prototype.changeFiguresDirection = function(idButton) {
+
+	if(this.revertedBoard && idButton == "top_direction_button")
+		idButton == "bottom_direction_button";
+	else if(this.revertedBoard && idButton == "bottom_direction_button")
+		idButton = "top_direction_button";
+
 	if(idButton == "top_direction_button")
 	{
 		if(this.topFiguresDirection == Chess.UI.DOWN_DIRECTION)
 		{
 			var rotateDeg = 0;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", "rotate(${rotateDeg}deg)");
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", `rotate(${rotateDeg}deg)`);
 			this.topFiguresDirection =  Chess.UI.UP_DIRECTION;
 		}
 		else if(this.topFiguresDirection == Chess.UI.UP_DIRECTION)
 		{
 			var rotateDeg = 180;
-			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", "rotate(${rotateDeg}deg)");
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.black").css("transform", `rotate(${rotateDeg}deg)`);
 			this.topFiguresDirection =  Chess.UI.DOWN_DIRECTION;
 		}		
 	}
 	else if(idButton == "bottom_direction_button")
 	{
-		$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", "rotate(180deg)");
-		this.bottomFiguresDirection = this.bottomFiguresDirection == Chess.UI.UP_DIRECTION ? 
-		Chess.UI.DOWN_DIRECTION : Chess.UI.UP_DIRECTION;
+		if(this.bottomFiguresDirection == Chess.UI.DOWN_DIRECTION)
+		{
+			var rotateDeg = 0;
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", `rotate(${rotateDeg}deg)`);
+			this.bottomFiguresDirection =  Chess.UI.UP_DIRECTION;
+		}
+		else if(this.bottomFiguresDirection == Chess.UI.UP_DIRECTION)
+		{
+			var rotateDeg = 180;
+			$(Chess.UI.CHESSBOARD_TABLE + " tbody").find("div.white").css("transform", `rotate(${rotateDeg}deg)`);
+			this.bottomFiguresDirection =  Chess.UI.DOWN_DIRECTION;
+		}	
 	}
 }
