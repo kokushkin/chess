@@ -364,7 +364,7 @@ Chess.UI.prototype.setRevertBoard = function() {
 
 	this.revertBoard();
 
-	this.updatePieces();
+	this.updateChessPosition();
 }
 
 /**
@@ -432,7 +432,7 @@ Chess.UI.prototype.setChangeFiguresDirection = function(idButton) {
 		}
 	}
 
-	this.updatePieces();
+	this.updateChessPosition();
 }
 
 
