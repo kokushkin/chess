@@ -6,6 +6,7 @@
 		<title>Chess</title>
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="chess.css">
+		<link rel="stylesheet" href="swich_bottons.css">
 		<link rel="shortcut icon" href="chess.ico">
 	</head>
 	<body>
@@ -13,9 +14,14 @@
 		<div id="content">
 			<div class="panel corner"></div>
 			<div id="top_panel" class="panel horizontal_panel">
-				<button>Human</button>
-				<button>Ask Computer</button>
-				<button>Computer</button>
+				<div class="switch-field">					
+					<input type="radio" id="switch_hunan_1" name="ai_swich_1" value="hunan" checked/>
+					<label for="switch_hunan_1">Human</label>
+					<input type="radio" id="switch_ask_comp_1" name="ai_swich_1" value="ask_comp" />
+					<label for="switch_ask_comp_1">Ask Computer</label>
+					<input type="radio" id="switch_computer_1" name="ai_swich_1" value="computer" />
+					<label for="switch_computer_1">Computer</label>
+				</div>
 				<div class="clear"></div>
 			</div>
 			<div class="panel corner"></div>
@@ -33,10 +39,15 @@
 			<div class="clear"></div>
 			<div class="panel corner"></div>
 			<div id="buttom_panel" class="panel horizontal_panel">
-					<button>Human</button>
-					<button>Ask Computer</button>
-					<button>Computer</button>
-					<div class="clear"></div>
+				<div class="switch-field">					
+					<input type="radio" id="switch_hunan" name="ai_swich" value="hunan" checked/>
+					<label for="switch_hunan">Human</label>
+					<input type="radio" id="switch_ask_comp" name="ai_swich" value="ask_comp" />
+					<label for="switch_ask_comp">Ask Computer</label>
+					<input type="radio" id="switch_computer" name="ai_swich" value="computer" />
+					<label for="switch_computer">Computer</label>
+				</div>
+				<div class="clear"></div>
 			</div>
 			<div class="panel corner"></div>
 
