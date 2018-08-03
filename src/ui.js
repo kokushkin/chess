@@ -25,13 +25,16 @@ Chess.UI = function() {
 	this.initialFirstPlayerView = {
 		playerColor : Chess.UI.WHITE_COLOR,
 		playerDirection : Chess.UI.UP_DIRECTION,
-		playerPosition : Chess.UI.BUTTOM_POSITION
+		playerPosition : Chess.UI.BUTTOM_POSITION,
+		playMode : Chess.UI.HUMAN
+
 	};
 
 	this.initialSecondPlayerView = {
 		playerColor : Chess.UI.BLACK_COLOR,
 		playerDirection : Chess.UI.UP_DIRECTION,
-		playerPosition : Chess.UI.TOP_POSITION
+		playerPosition : Chess.UI.TOP_POSITION,
+		playMode : Chess.UI.HUMAN
 	}
 
 	this.currentFirstPlayerView = $.extend({}, this.initialFirstPlayerView);
@@ -88,6 +91,14 @@ Chess.UI.BUTTOM_POSITION = "bottom";
  */
 Chess.UI.WHITE_COLOR = "white";
 Chess.UI.BLACK_COLOR = "black";
+
+/**
+ * @const
+ * @type {string}
+ */
+Chess.UI.HUMAN = "human";
+Chess.UI.ASK_COMPUTER = "ask_computer";
+Chess.UI.COMPUTER = "computer";
 
 /** 
  * Creates a new chessboard table under an element with id="chessboard"
@@ -452,4 +463,20 @@ Chess.UI.prototype.changeFiguresDirection = function() {
 		$(Chess.UI.CHESSBOARD_TABLE + " tbody")
 		.find(`div.${this.currentSecondPlayerView.playerColor}`).css("transform", `rotate(180deg)`);
 	}
+}
+
+
+Chess.UI.prototype.setPlayMode = function(idButton) {
+	if(idButton == "switch_hunan_1")
+		this.currentFirstPlayerView.playMode = Chess.UI.HUMAN;
+	else if(idButton == "switch_ask_comp_1")
+		this.currentFirstPlayerView.playMode = Chess.UI.ASK_COMPUTER;
+	else if(idButton == "switch_computer_1")
+		this.currentFirstPlayerView.playMode = Chess.UI.COMPUTER;
+	else if(idButton == "switch_hunan_2")
+		this.currentSecondPlayerView.playMode = Chess.UI.HUMAN;
+	else if(idButton == "switch_ask_comp_2")
+		this.currentSecondPlayerView.playMode = Chess.UI.ASK_COMPUTER;
+	else if(idButton == "switch_computer_2")
+		this.currentSecondPlayerView.playMode = Chess.UI.COMPUTER;
 }
