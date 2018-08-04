@@ -341,7 +341,23 @@ Chess.UI.prototype.updateChessPosition = function() {
 	this.updatePieces();
 
 	var status = this.chessPosition.getStatus();
-	if (status === Chess.Position.Status.NORMAL && this.chessPosition.getTurnColor() === Chess.PieceColor.BLACK) {
+	if (status === Chess.Position.Status.NORMAL && 
+		((this.chessPosition.getTurnColor() === Chess.PieceColor.BLACK && 
+
+			((this.currentFirstPlayerView.playerColor === Chess.UI.BLACK_COLOR && 
+			 this.currentFirstPlayerView.playMode === Chess.UI.COMPUTER) || 
+
+			(this.currentSecondPlayerView.playerColor === Chess.UI.BLACK_COLOR && 
+			this.currentSecondPlayerView.playMode === Chess.UI.COMPUTER))) || 
+
+
+		 (this.chessPosition.getTurnColor() === Chess.PieceColor.WHITE &&
+
+			((this.currentFirstPlayerView.playerColor === Chess.UI.WHITE_COLOR &&
+			  this.currentFirstPlayerView.playMode === Chess.UI.COMPUTER) || 
+
+			 (this.currentSecondPlayerView.playerColor === Chess.UI.WHITE_COLOR &&
+			   this.currentSecondPlayerView.playMode === Chess.UI.COMPUTER))))) {
 		this.doComputerMove();
 	} else {
 		this.updateMoves();
