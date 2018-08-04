@@ -311,7 +311,7 @@ Chess.UI.prototype.doComputerMove = function() {
 	$("#moves").html("");
 	var ui = this;
 	var dim = $("#dim");
-	dim.fadeIn(function() {
+	//dim.fadeIn(function() {
 		var move = ui.ai.search(ui.chessPosition);
 		if (!move) {
 			// Mates should have been checked in updateChessPosition
@@ -329,7 +329,7 @@ Chess.UI.prototype.doComputerMove = function() {
 		dim.fadeOut(function() {
 			piece.animate({"top": dy + "px", "left": dx + "px"}, function() { ui.updateChessPosition(); });
 		});
-	});
+	//});
 };
 
 /**
