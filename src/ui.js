@@ -415,7 +415,10 @@ Chess.UI.prototype.revertBoard = function() {
 	$(bordTable).append(rowsArray);
 
 	//transfering swich mode buttons
-
+	var topSwitchField = $('#top_panel .switch-field');
+	var buttomSwitchField = $('#buttom_panel .switch-field');
+	$('#buttom_panel').append(topSwitchField.detach());
+	$('#top_panel').append(buttomSwitchField.detach());
 
 	//changing figures directions
 	this.changeFiguresDirection("top_direction_button");
