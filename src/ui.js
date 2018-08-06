@@ -414,8 +414,8 @@ Chess.UI.prototype.revertBoard = function() {
 	rowsArray.reverse();
 	$(bordTable).append(rowsArray);
 
-	//set board is reverted
-	this.revertedBoard = this.revertedBoard ? false : true;
+	//transfering swich mode buttons
+
 
 	//changing figures directions
 	this.changeFiguresDirection("top_direction_button");
@@ -495,4 +495,6 @@ Chess.UI.prototype.setPlayMode = function(idButton) {
 		this.currentSecondPlayerView.playMode = Chess.UI.ASK_COMPUTER;
 	else if(idButton == "switch_computer_2")
 		this.currentSecondPlayerView.playMode = Chess.UI.COMPUTER;
+
+	this.updateChessPosition();
 }
