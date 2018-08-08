@@ -34,21 +34,6 @@ button {
 	height: 38px;
 }
 
-#revert_button{
-	position:absolute;
-	top: 325px; 
-}
-
-#top_direction_button {
-	position:absolute;
-	top: 0px;
-}
-
-#bottom_direction_button {
-	position:absolute;
-	top: 650px;
-}
-
 #content {
 	background: rgb(253, 255, 162);
 	padding: 14px 40px;
@@ -121,7 +106,9 @@ button {
 }
 
 #left_panel {
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .clear {
