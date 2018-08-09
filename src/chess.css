@@ -37,6 +37,8 @@ button {
 #content {
 	background: rgb(253, 255, 162);
 	padding: 14px 40px;
+	display:flex;
+	flex-wrap: wrap;
 }
 
 #help {
@@ -58,7 +60,6 @@ button {
 #chessboard {
 	width: 700px;
 	height: 700px;
-	float: left;
 	padding: 0;
 	margin: 5px;
 }
@@ -68,7 +69,6 @@ button {
 	border-radius: 14px;
 	padding: 5px;
 	margin: 5px;
-	float: left;
 	background-color: #a1caa3;
 	/* overflow: auto; */
 }
@@ -99,10 +99,6 @@ button {
 
 #moves button, #right_panel button {
 	width: 100%;
-}
-
-#top_panel button, #buttom_panel button {
-	float: left;
 }
 
 #left_panel {
